@@ -26,8 +26,11 @@ table, th, td {
 }
 code, pre {
   background: #222326;
-  color: #edf6ff;
+  color:#d7dadb !important;
   border-radius: 6px;
+}
+code .hljs-comment, pre .hljs-comment {
+  color:rgb(5, 160, 0) !important;
 }
 em, i {
   color: #cfc6aa;
@@ -37,7 +40,6 @@ strong, b {
 }
 blockquote {
   border-left: 3px solid #333941;
-  color: #b9bcc0;
   background: #1b1c1e;
 }
 hr {
@@ -101,7 +103,7 @@ hr {
 
 1. [Was ist Informatik?](#was-ist-informatik)
 
-2. [Programmieren / "Coden"](#programmieren--coden)
+2. [Programmieren](#programmieren)
     - [Wir fangen an](#wir-fangen-an)
     - [Wie schreibe ich aber Pseudocode? (objektorientiert)](#wie-schreibe-ich-aber-pseudocode-objektorientiert)
     - [Yippie, ich verstehe Pseudocode, aber wie weiter?](#yippie-ich-verstehe-pseudocode-aber-wie-weiter)
@@ -113,13 +115,13 @@ hr {
     - [Logische Operatoren](#logische-operatoren)
     - [Short Circuit Evaluation](#short-circuit-evaluation)
     - [Switch-Case](#switch-case)
-    - [Schleifen: while, for, do-while](#schleifen-while-for-do-while)
+    - [Schleifen](#schleifen)
 
 4. [Gängige Datentypen](#gängige-datentypen)
     - [Bool](#bool)
     - [Zahlen (int, float, double)](#zahlen-int-float-double)
     - [String](#string)
-    - [List / Array / Set / Map](#list--array--set--map)
+    - [List](#list)
 
 5. [Python und dessen Schizophrenie](#python-und-dessen-schizophrenie)
     - [Whitespaces und Einrückung](#whitespaces-und-einrückung)
@@ -140,7 +142,7 @@ hr {
     Die Informatik beschreibt eine Ansammlung verschiedener Disziplinen angewandter Mathematik.
     Ganz gleich ob Systeme konzeptioniert und entwickelt werden oder man einfach nur den Code-Monkey macht.
 
-## Programmieren / "Coden"
+## Programmieren 
 
     Das Progammieren / Coden beschreibt das Definieren und Anwenden von Regeln, um einen bestimmten Prozess "zum Leben zu erwecken"
 
@@ -220,7 +222,7 @@ Dementsprechend "besorgen" wir uns:
     Kuchenform
 
 Und jetzt schreiben wir unseren Pseudocode:
-
+    ```python
     function Backroutine():
         Schüssel1 = Schüsselroboter.NimmNeueSchüssel()
         Schüssel2 = Schüsselroboter.NimmNeueSchüssel()
@@ -237,7 +239,7 @@ Und jetzt schreiben wir unseren Pseudocode:
         Greifarm.BewegeAusOfen(Kuchenform)
 
         return Kuchenform.Inhalt
-
+    	```
 Nach einem ersten groben Entwurf, prüfen wir, ob wir alles bedacht haben, was wir machen wollten:
 
     "Gegeben sei [....]" 
@@ -265,7 +267,7 @@ Note:
     Man kann auch behaupten, dass irgendein Sklave die ganzen Aktionen durchführt, solange die Sachen passieren, ist es **(meistens)** irrelevant, wer genau das macht. 
 
 *Pseudocode*
-```pseudocode
+```py
 function BrotBelegen(Brot brot, Brotbelag brotbelag)
     butter = neue Butter
     maggi = neue Maggi
@@ -316,7 +318,7 @@ Kontrollstrukturen sind die primitivste Form, den Fluss des Programms zu kontrol
 #### **Verzweigungen / if-Statements**
 
 *Pseudocode*
-```pseudocode
+```py
 if Bedingung dann
     // tue etwas
 sonst wenn Bedingung2 dann
@@ -410,13 +412,20 @@ Besonderheiten beim Agieren mit if-Statements:
     - In anderen Sprachen muss man das explizit mit `&&` verknüpfen.
 
 - **Typenkonversionen:**  
-  Seien Sie vorsichtig, dass Sie nicht aus Versehen Werte vergleichen, die gar nicht wirklich vergleichbar sind (z. B. Zahl und String). Das Ergebnis kann sonst unerwartet ausfallen.
+  *Achtung!*
+  Theoretisch lassen sich alle Objekte miteinander vergleichen, allerdings ist es nicht immer sinnvoll!
+
+  ```python
+    if 3 < x < "Sinnloser Vergleich"
+        ...
+
+  ```
 
 #### **Switch-Case**
 
-Für den Fall, dass die if-statements zu viele werden:
+Für den Fall, dass sich if-statements häufen:
 
-```pseudocode
+```py
 switch Wert
     fall 1:
         // tue etwas
@@ -471,16 +480,12 @@ switch (wetter)
 
 Schleifen dienen dazu, Anweisungen mehrfach hintereinander auszuführen, solange eine bestimmte Bedingung erfüllt ist.
 
-| Schleifenart  | Beschreibung                                      | Beispiel (Python)                      | Beispiel (C#/Java)                                           |
-|---------------|--------------------------------------------------|----------------------------------------|--------------------------------------------------------------|
-| **while**     | Wiederholt, solange Bedingung wahr ist            | `while x < 10:`<br>&nbsp;&nbsp;`x += 1`| `while (x < 10) { x++; }`                                    |
-| **for** (Zähl.) | Wiederholt eine feste Anzahl von Durchläufen      | `for i in range(5):`<br>&nbsp;&nbsp;`print(i)`| `for (int i=0; i<5; i++) { System.out.println(i); }`         |
-| **for-each**  | Geht alle Elemente einer Sammlung/Liste durch     | `for name in namen:`<br>&nbsp;&nbsp;`print(name)`| `for (String name : namen) { System.out.println(name); }`     |
-| **do-while**  | Führt erst aus, prüft dann Bedingung (mind.1x)    | *(Nicht direkt in Python)*<br><br>     | `do { x++; } while(x<10);`                                   |
-
 **Beispiele:**
 
 *while*-Schleife (Python):
+
+Wiederholt, solange Bedingung wahr ist
+
 ```python
 x = 0
 while x < 5:
@@ -489,6 +494,7 @@ while x < 5:
 ```
 
 *for*-Schleife (C#):
+ Wiederholt eine feste Anzahl von Durchläufen      
 ```csharp
 for (int i = 0; i < 3; i++)
 {
@@ -497,6 +503,7 @@ for (int i = 0; i < 3; i++)
 ```
 
 *for-each*-Schleife (Python):
+Geht alle Elemente einer Sammlung/Liste durch
 ```python
 farben = ["rot", "grün", "blau"]
 for farbe in farben:
@@ -506,6 +513,7 @@ for farbe in farben:
 <div class="pagebreak"></div>
 
 *do-while*-Schleife (Java):
+Führt erst aus, prüft dann Bedingung (mind.1x)
 ```java
 int y = 0;
 do {
@@ -517,7 +525,7 @@ do {
 **Hinweise:**
 - Die genauen Syntax-Details hängen von der Programmiersprache ab.
 - Schleifen können mit `break` (Abbruch) oder `continue` (nächster Schleifendurchlauf) beeinflusst werden.
-- In Python gibt es keine direkte `do-while`-Schleife; das lässt sich mit `while True:` und `break` simulieren.
+- Eine Schleife **braucht** ein Abbruchkriterium, ansonsten kann sich das Programm *aufhängen*
 
 <div class="pagebreak"></div>
 
@@ -633,6 +641,7 @@ Eine schematische Darstellung eines Strings im Speicher (z. B. `"Hallo"`):
 |--------|-----|-----|-----|-----|-----|------------|
 | Wert   | H   | a   | l   | l   | o   | `\0`*      |
 
+
  *`\0` bezeichnet den "Null-Terminator" und wurde früher genutzt, um das Ende des Strings zu kennzeichnen. In moderneren Sprachen wie Python oder Java merkt sich das System die Länge des Strings anderweitig und ein solcher Abschluss ist oft nicht sichtbar.
 
 - **Jeder Buchstabe** des Strings wird als eigenes Zeichen (z. B. als Zahl im Zeichensatz wie ASCII oder UTF-8) gespeichert.
@@ -699,14 +708,14 @@ Eine schematische Darstellung einer Liste im Speicher (z. B. `[10, 20, 30]`):
 | append()             | Hängt Element ans Listenende an               | liste.append(42)                               |
 | insert()             | Fügt Element an bestimmter Stelle ein         | liste.insert(1, 99)                            |
 | extend()             | Hängt mehrere Elemente an                     | liste.extend([7,8])                            |
-| pop()                | Entfernt (und gibt zurück) ein Element        | liste.pop() / liste.pop(0)                     |
+| pop()                | Entfernt ein Element (und gibt es zurück)     | liste.pop() / liste.pop(0)                     |
 | remove()             | Entfernt das erste Vorkommen eines Werts      | liste.remove(20)                               |
 | del                  | Löscht Element oder ganzen Bereich            | del liste[2] / del liste[1:3]                  |
 | len()                | Gibt die Länge der Liste zurück               | len(liste)                                     |
 | in                   | Prüft, ob Wert enthalten ist                  | 5 in liste                                     |
 | index()              | Liefert den Index eines ersten Auftretens     | liste.index(20)                                |
 | count()              | Zählt, wie oft ein Wert in der Liste ist      | liste.count(10)                                |
-| sort() / reverse()   | Sortiert/Kehrt Reihenfolge um                 | liste.sort(), liste.reverse()                   |
+| sort() / reverse()   | Sortiert/Kehrt Reihenfolge um                 | liste.sort(), liste.reverse()                  |
 | copy()               | Erstellt eine (flache) Kopie                  | liste.copy()                                   |
 
 **Hinweise:**
@@ -727,6 +736,7 @@ person = {
     "email": "alice@example.com"
 }
 ```
+
 - Jeder **Schlüssel** ist eindeutig und verweist auf einen bestimmten **Wert**.
 - Zugriff auf einen Wert per Schlüssel: `person["alter"] - ergibt 25`
 - Man kann beliebige Datentypen für Werte verwenden (Zahlen, Listen, weitere Dictionaries usw.).
@@ -833,7 +843,7 @@ Auch wenn du eigentlich Kupfer erwartest, kann ich dir ohne Sorgen Pflasterstein
     obj2 = MeineKlasse()
     print(hasattr(obj2, 'y'))  # False
     ```
-    Das heißt, Instanzen derselben Klasse können unterschiedliche Attribute besitzen – auch das ist irgendwie „schizophren“!
+    Das heißt, Instanzen derselben Klasse können unterschiedliche Attribute besitzen – „*s**c**h*i*z*oph*re*n“!
 
 Diese „Schizophrenien“ führen manchmal zu merkwürdigen Bugs – deshalb: Verständnis zahlt sich aus!
 
@@ -841,7 +851,7 @@ Diese „Schizophrenien“ führen manchmal zu merkwürdigen Bugs – deshalb: V
 
 *Beispiel*
 ```python
-# Turbo-schizophrener Python-Code: alles auf einmal!
+# alles auf einmal!
 
 class Irgendwas:
     def __init__(self, wert):
@@ -1333,6 +1343,9 @@ int main() {
 
 Kurz:  
 *C++* ist viel mehr als ein „besseres C“ – es bringt mächtige neue Werkzeuge für große, komplexe Software, bleibt aber trotzdem „nah am Metall“.
+
+<div style="background: #181a1b; min-height:183px;"></div>
+
 
 
 
