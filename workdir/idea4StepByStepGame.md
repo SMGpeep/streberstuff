@@ -1,54 +1,107 @@
-## 🕹️ Spielerische Projekt-Ideen mit Dictionaries in Python
+## 🐍 Schritt-für-Schritt-Anleitung: Hangman (Galgenmännchen) mit Dictionary bauen
 
-Du möchtest lieber ein Spiel bauen? Super Idee! Hier sind ein paar coole Game-Projekte, bei denen Python-Dictionaries eine wichtige Rolle spielen und mit denen du garantiert Spaß beim Programmieren hast:
-
----
-
-### 1. 🎯 Wort-Quiz-Game
-
-**Beschreibung:**  
-Das Programm zeigt zufällig ein deutsches Wort an, und du musst die richtige englische Übersetzung eingeben. Jedes richtige Wort gibt einen Punkt. Höchstpunktzahl knacken?  
-_Tipp:_ Speichere die Wörter und ihre Lösungen in einem Dictionary!
-
-![Quiz Animation](https://media.giphy.com/media/26FPy3QZQqGtDcrja/giphy.gif)
+Du willst selbst ein „Hangman“-Game in Python programmieren? Klasse! Wir machen das gemeinsam – und zwar so, dass Dictionarys ganz wichtig sind und du dabei alles Schritt für Schritt verstehst.
 
 ---
 
-### 2. 🐍 "Hangman"/Galgenmännchen
+### Was ist das Ziel?
 
-**Beschreibung:**  
-Das klassische Spiel! Ein Wort wird zufällig gewählt (kannst du auch aus deinem Dictionary ziehen). Die Buchstaben müssen geraten werden, bevor der Galgen "fertig" ist. Wörter und Hinweise werden im Dictionary gespeichert.
-
-![Hangman Animation](https://media.giphy.com/media/3o6ZtmSSRlv4I1RFXC/giphy.gif)
+Errate ein geheimes Wort – Buchstabe für Buchstabe! Für jeden falschen Tipp wird der Galgen „vollständiger“. Schaffst du es, das Wort zu lösen, bevor das Galgenmännchen „fertig gebaut“ ist?
 
 ---
 
-### 3. 🚀 Abenteuerspiel: "Escape the Room"
+### 1️⃣ Grundgerüst: Wörter & Hinweise ins Dictionary packen
 
-**Beschreibung:**  
-Baue ein Text-Adventure, bei dem die verschiedenen Räume, Gegenstände, Gegner oder Türen als Schlüssel im Dictionary hinterlegt sind. Der User kann Befehle wie "gehe nach Norden", "benutze Schlüssel" o.Ä. eintippen.
+Wir brauchen eine Sammlung an Wörtern, die geraten werden können – und jeweils vielleicht einen kleinen Hinweis dazu.
+
+```python
+woerter = {
+    "python": "Programmiersprache",
+    "katze": "Ein Haustier, das schnurren kann",
+    "regen": "Fällt manchmal vom Himmel",
+    "auto": "Fährt auf vier Rädern",
+    # ... (füge gerne eigene Wörter & Hinweise dazu!)
+}
+```
+
+---
+
+### 2️⃣ Zufallswort wählen
+
+```python
+import random
+wort, hinweis = random.choice(list(woerter.items()))
+```
 
 ---
 
-### 4. ⏳ Memory-Spiel („Paare suchen“)
+### 3️⃣ Spielablauf (Basics)
 
-**Beschreibung:**  
-Das Programm zeigt verdeckte Karten (Wörter/Paare), und der User deckt zwei auf. Wenn sie zusammenpassen (z.B. deutsches und englisches Wort), gibt’s einen Punkt. Die Paare verwaltest du bequem im Dictionary.
+- Zeige dem Spieler das Wort als „____“ (also verdeckt)
+- Frage nach einem Buchstaben
+- Wenn der Buchstabe im Wort ist: Aufdecken!
+- Sonst: Fehler zählen, Galgen „zeichnen“
+- Gewonnen? Verloren? Oder nochmal raten!
+
+---
+
+### 4️⃣ Beispiel für eine Spielrunde
+
+```python
+geheimwort = wort
+geratene_buchstaben = set()
+fehler = 0
+max_fehler = 7   # z.B. 7 Fehler sind Game Over
+
+while True:
+    # Wortanzeige (z.B. _ y t _ _ _)
+    anzeige = [b if b in geratene_buchstaben else "_" for b in geheimwort]
+    print("Wort:", " ".join(anzeige))
+    print(f"Tipp: {hinweis}")
+    print(f"Bisher geraten: {', '.join(sorted(geratene_buchstaben))}")
+    print(f"Fehler: {fehler}/{max_fehler}")
+
+    buchstabe = input("Nächster Buchstabe: ").lower()
+    if not buchstabe or len(buchstabe) != 1 or not buchstabe.isalpha():
+        print("Bitte gib genau einen Buchstaben ein!")
+        continue
+    if buchstabe in geratene_buchstaben:
+        print("Den hast du schon probiert!")
+        continue
+
+    geratene_buchstaben.add(buchstabe)
+    if buchstabe in geheimwort:
+        print("Richtig!")
+        if all(b in geratene_buchstaben for b in geheimwort):
+            print(f"Glückwunsch, das Wort war: {geheimwort}")
+            break
+    else:
+        print("Leider falsch.")
+        fehler += 1
+        if fehler >= max_fehler:
+            print(f"Game over! Das Wort war: {geheimwort}")
+            break
+```
 
 ---
 
-### 5. 🎲 Zahlen-Ratespiel mit Highscore-Liste
+### 5️⃣ Eigene Features & Ideen
 
-**Beschreibung:**  
-Lass den User eine Zufallszahl erraten. Wer ist am besten? Die Highscores aller Spieler:innen speicherst du in einem Dictionary: Name → Punktzahl.
+- Füge eine Highscore-Liste (mit Dictionary!) hinzu
+- Lass Wörter per Zufall, nach Länge, nach Schwierigkeitsgrad wählen
+- Baue ein Menü ein: „Neues Wort hinzufügen“, „Hinweise sehen“, „Spiel starten“  
+- Speichere neue Wörter dauerhaft (z.B. in einer Datei)  
+- Baue ASCII-Art für das „Galgenmännchen“ ein!
 
 ---
+
+**Fazit:**  
+Mit Dictionarys kannst du Wörter, Hinweise, Highscores, Spielerprofile & Co. super easy verwalten. Trau dich: Teste, ändere, probier rum!
 
 > **Tipp:**  
-> Mach’s Schritt für Schritt: Baue z.B. erst das Grundspiel, dann neue Features (z. B. Level, Highscore, Spieler-Profil, …) dazu – alles lässt sich prima mit Dictionaries umsetzen!
+> Baue zuerst das Grundspiel und dann Schritt für Schritt neue Features ein.  
+> Fehler machen gehört dazu – und macht am Ende den Code besser!
 
 ---
 
-Na, Lust bekommen?  
-👉 Hier findest du bald eine Schritt-für-Schritt-Anleitung für dein erstes Python-Spiel!
-
+Viel Spaß beim Coden deines eigenen Hangman-Games! 🚀
