@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>idea4StepByStepGame.md</title>
+<title>HangmanStepByStep.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -365,118 +365,147 @@ code {
           : 'default'
     });
   </script>
-<h1 id="todo-anpassen">todo: anpassen!</h1>
-<pre><code>=&gt; ein html draus machen, gifs einbinden / visualisieren, etc.
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Side-Projekt: Hangman Schritt für Schritt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #f8f9fa;
+            color: #222;
+            line-height: 1.7;
+        }
+        .kapitel {
+            border: 1px solid #ebebeb;
+            box-shadow: 2px 2px 8px #e7e7e7;
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 35px;
+            border-radius: 7px;
+        }
+        .weiter-btn {
+            display: block;
+            margin: 25px auto 0 auto;
+            padding: 10px 30px;
+            font-size: 1rem;
+            background-color: #71b380;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .weiter-btn:hover {
+            background-color: #599c6b;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        .kapitel {
+            display: none;
+        }
+        .kapitel.aktiv {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Side-Projekt: Hangman Schritt für Schritt mit Python</h1>
+    <p style="font-style:italic;">Optionales Übungsprojekt – Arbeiten Sie Kapitel für Kapitel und bauen Sie Ihr eigenes Hangman-Spiel!</p>
+    <!-- Kapitel 1 -->
+    <section class="kapitel aktiv" id="kapitel1">
+        <h2>Kapitel 1: Was ist Hangman?</h2>
+        <p>
+            Hangman (Galgenmännchen) ist ein beliebtes Wortratespiel. Ziel ist es, Buchstaben zu raten, um ein verstecktes Wort zu finden.
+            In diesem Projekt programmieren wir Schritt für Schritt unser eigenes Hangman-Spiel in Python.
+        </p>
+        <button class="weiter-btn" onclick="zeigeKapitel(2)">Weiter zu Kapitel 2</button>
+    </section>
+    <!-- Kapitel 2 -->
+    <section class="kapitel" id="kapitel2">
+        <h2>Kapitel 2: Das Grundgerüst</h2>
+        <p>
+            Erstelle eine neue Python-Datei, z.B. <code>hangman.py</code>.<br>
+            Schreibe als allererstes folgenden Code, um das Spiel zu starten:
+        </p>
+        <pre>
+            print("Willkommen bei Hangman!")
+        </pre>
+        <p>
+            <b>Aufgabe:</b> Führe dein Skript aus und überprüfe, ob die Begrüßung erscheint.
+        </p>
+        <button class="weiter-btn" onclick="zeigeKapitel(3)">Weiter zu Kapitel 3</button>
+    </section>
+<pre><code>&lt;!-- Kapitel 3 --&gt;
+&lt;section class=&quot;kapitel&quot; id=&quot;kapitel3&quot;&gt;
+    &lt;h2&gt;Kapitel 3: Ein Wort auswählen&lt;/h2&gt;
+    &lt;p&gt;
+        Jetzt brauchst du ein Wort, das erraten werden soll. Lege ein kleines Wörter-Array an, aus dem zufällig ein Wort gewählt wird.&lt;br&gt;
+        Beispiel:
+    &lt;/p&gt;
+    &lt;pre&gt;
 </code></pre>
-<h2 id="%F0%9F%90%8D-schritt-f%C3%BCr-schritt-dein-erstes-hangman-spiel-galgenm%C3%A4nnchen">🐍 Schritt für Schritt: Dein erstes Hangman-Spiel (Galgenmännchen)</h2>
-<p>Möchtest du dein erstes Hangman-Game in Python programmieren? Super Idee!<br>
-In dieser Anleitung erkläre ich jeden Schritt extra anfängerfreundlich – damit du alles nachvollziehen kannst, auch wenn du gerade erst mit Python startest.<br>
-Wir benutzen ein Dictionary, also ein besonderes Wörterbuch in Python, mit dem du die Worte und Hinweise speichern kannst.</p>
-<hr>
-<h3 id="was-ist-hangman">Was ist Hangman?</h3>
-<p>Beim Hangman-Spiel überlegt sich der Computer ein geheimes Wort.<br>
-Du versuchst, dieses Wort Buchstabe für Buchstabe zu erraten. Immer wenn du einen falschen Buchstaben rätst, wird ein Teil vom Galgenmännchen „gemalt“. Schaffst du es, das Wort zu raten, bevor das Männchen fertig „hängt“?</p>
-<hr>
-<h3 id="1%EF%B8%8F%E2%83%A3-w%C3%B6rter-und-hinweise-als-dictionary-speichern">1️⃣ Wörter und Hinweise als Dictionary speichern</h3>
-<p>Ein Dictionary (auf Deutsch: Wörterbuch) ist in Python ein Behälter für „Schlüssel-Wert“-Paare.<br>
-Hier speichern wir unsere Wörter als Schlüssel und kleine Tipps als Werte.</p>
-<p>Das sieht so aus:</p>
-<pre class="hljs"><code><div><span class="hljs-comment"># Wörterbuch: Wort -&gt; Hinweis</span>
-woerter = {
-    <span class="hljs-string">"python"</span>: <span class="hljs-string">"Das ist eine Programmiersprache."</span>,
-    <span class="hljs-string">"katze"</span>: <span class="hljs-string">"Ein Haustier, das schnurren kann."</span>,
-    <span class="hljs-string">"regen"</span>: <span class="hljs-string">"Fällt manchmal vom Himmel (und macht nass)."</span>,
-    <span class="hljs-string">"auto"</span>: <span class="hljs-string">"Fährt auf vier Rädern – meistens schnell!"</span>,
-    <span class="hljs-comment"># Hier kannst du auch eigene Wörter &amp; Hinweise dazu eintragen :-)</span>
-}
-</div></code></pre>
-<p><em>Du kannst später noch mehr Wörter/Tipp-Paare eintragen, oder die vorhandenen anpassen.</em></p>
-<hr>
-<h3 id="2%EF%B8%8F%E2%83%A3-zuf%C3%A4llig-ein-wort-ausw%C3%A4hlen">2️⃣ Zufällig ein Wort auswählen</h3>
-<p>Wir wollen, dass jedes Mal ein anderes Wort drankommt.<br>
-Mit der <code>random</code>-Bibliothek kann man ganz einfach ein zufälliges Wort (und den dazugehörigen Hinweis) aus unserem Dictionary ziehen:</p>
-<pre class="hljs"><code><div><span class="hljs-keyword">import</span> random
+<p>import random</p>
+<p>woerter = [&quot;python&quot;, &quot;hangman&quot;, &quot;programmieren&quot;]<br>
+wort = random.choice(woerter)<br>
+</pre><br>
+<p><br>
+<b>Aufgabe:</b> Gib das gewählte Wort mit <code>print(wort)</code> zur Kontrolle aus.<br>
+</p><br>
+<button class="weiter-btn" onclick="zeigeKapitel(4)">Weiter zu Kapitel 4</button><br>
+</section></p>
+<pre><code>&lt;!-- Kapitel 4 --&gt;
+&lt;section class=&quot;kapitel&quot; id=&quot;kapitel4&quot;&gt;
+    &lt;h2&gt;Kapitel 4: Das Spielgerüst und erste Benutzereingabe&lt;/h2&gt;
+    &lt;p&gt;
+        Nun bauen wir die Spiel-Logik schrittweise auf. 
+        Frage mit &lt;code&gt;input()&lt;/code&gt; einen Buchstaben vom Spieler ab und gib ihn danach aus.
+    &lt;/p&gt;
+    &lt;pre&gt;
+</code></pre>
+<p>buchstabe = input(&quot;Gib einen Buchstaben ein: &quot;)<br>
+print(&quot;Du hast gewählt:&quot;, buchstabe)<br>
+</pre><br>
+<p><br>
+<b>Aufgabe:</b> Integriere diesen Code und führe das Programm aus.<br>
+</p><br>
+<button class="weiter-btn" onclick="zeigeKapitel(5)">Weiter zu Kapitel 5</button><br>
+</section></p>
+<pre><code>&lt;!-- Kapitel 5 (Beispiel; weitere Kapitel können genauso hinzugefügt werden) --&gt;
+&lt;section class=&quot;kapitel&quot; id=&quot;kapitel5&quot;&gt;
+    &lt;h2&gt;Kapitel 5: Nächste Schritte&lt;/h2&gt;
+    &lt;p&gt;
+        Super! Von hier aus kannst du das Spiel um folgende Aspekte erweitern:
+        &lt;ul&gt;
+            &lt;li&gt;Vergleiche den geratenen Buchstaben mit dem gesuchten Wort&lt;/li&gt;
+            &lt;li&gt;Zeige den aktuellen Stand des Wortes (_ y _ h _ o _)&lt;/li&gt;
+            &lt;li&gt;Zähle die Fehlversuche&lt;/li&gt;
+            &lt;li&gt;Beende das Spiel bei Gewinn oder Verlust&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;i&gt;Konkrete Teilaufgaben dazu folgen noch in den nächsten Kapiteln.&lt;/i&gt;
+    &lt;/p&gt;
+    &lt;button class=&quot;weiter-btn&quot; onclick=&quot;zeigeKapitel(1)&quot;&gt;Zurück zum Anfang&lt;/button&gt;
+&lt;/section&gt;
 
-<span class="hljs-comment"># Aus dem Dictionary eine beliebige (Wort, Hinweis)-Kombination auswählen</span>
-wort, hinweis = random.choice(list(woerter.items()))
-</div></code></pre>
-<p><em>Der Computer wählt so ein beliebiges Wort + Tipp für dich.</em></p>
-<hr>
-<h3 id="3%EF%B8%8F%E2%83%A3-wie-l%C3%A4uft-das-spiel">3️⃣ Wie läuft das Spiel?</h3>
-<ul>
-<li>Das Wort bleibt geheim – es wird als lauter Unterstriche angezeigt („_ _ _ _“).</li>
-<li>Du gibst einen Buchstaben ein.</li>
-<li>Ist der Buchstabe im Wort, wird er aufgedeckt.</li>
-<li>Ist er nicht drin, zählst du 1 Fehler mehr.</li>
-<li>Wenn du zu viele Fehler machst, verlierst du.</li>
-<li>Wenn du alle Buchstaben errätst, hast du gewonnen.</li>
-</ul>
-<hr>
-<h3 id="4%EF%B8%8F%E2%83%A3-beispiel-eine-ganze-spielrunde">4️⃣ Beispiel: Eine ganze Spielrunde</h3>
-<p>Hier ist ein einfacher Beispielcode, wie eine Runde aussehen kann.<br>
-Kommentarzeilen (<code># ...</code>) erklären alles Schritt für Schritt. Lies sie in Ruhe durch!</p>
-<pre class="hljs"><code><div>geheimwort = wort  <span class="hljs-comment"># Das Wort, das erraten werden muss</span>
-geratene_buchstaben = set()   <span class="hljs-comment"># Hier speichern wir, was du schon geraten hast</span>
-fehler = <span class="hljs-number">0</span>      <span class="hljs-comment"># So viele Fehler hast du gemacht</span>
-max_fehler = <span class="hljs-number">7</span>  <span class="hljs-comment"># Nach 7 Fehlern ist leider Schluss</span>
-
-<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
-    <span class="hljs-comment"># So sieht das Wort für dich aus: erratene Buchstaben werden gezeigt</span>
-    anzeige = [buchstabe <span class="hljs-keyword">if</span> buchstabe <span class="hljs-keyword">in</span> geratene_buchstaben <span class="hljs-keyword">else</span> <span class="hljs-string">"_"</span> <span class="hljs-keyword">for</span> buchstabe <span class="hljs-keyword">in</span> geheimwort]
-    print(<span class="hljs-string">"Wort:"</span>, <span class="hljs-string">" "</span>.join(anzeige))
-    print(<span class="hljs-string">f"Tipp: <span class="hljs-subst">{hinweis}</span>"</span>)
-    print(<span class="hljs-string">f"Bisher geraten: <span class="hljs-subst">{<span class="hljs-string">', '</span>.join(sorted(geratene_buchstaben))}</span>"</span>)
-    print(<span class="hljs-string">f"Fehler: <span class="hljs-subst">{fehler}</span>/<span class="hljs-subst">{max_fehler}</span>"</span>)
-
-    <span class="hljs-comment"># Jetzt fragt der Computer dich nach dem nächsten Buchstaben</span>
-    buchstabe = input(<span class="hljs-string">"Bitte gib einen Buchstaben ein: "</span>).lower()
-    
-    <span class="hljs-comment"># Prüfe, ob die Eingabe gültig ist (nur EIN Buchstabe, kein Zahl/leerzeichen)</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> buchstabe <span class="hljs-keyword">or</span> len(buchstabe) != <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> buchstabe.isalpha():
-        print(<span class="hljs-string">"Achtung: Bitte genau einen Buchstaben eingeben!"</span>)
-        <span class="hljs-keyword">continue</span>
-
-    <span class="hljs-keyword">if</span> buchstabe <span class="hljs-keyword">in</span> geratene_buchstaben:
-        print(<span class="hljs-string">"Den Buchstaben hast du schon versucht."</span>)
-        <span class="hljs-keyword">continue</span>
-
-    <span class="hljs-comment"># Füge den neuen Buchstaben zu den geratenen hinzu</span>
-    geratene_buchstaben.add(buchstabe)
-
-    <span class="hljs-keyword">if</span> buchstabe <span class="hljs-keyword">in</span> geheimwort:
-        print(<span class="hljs-string">"Richtig geraten!"</span>)
-        <span class="hljs-comment"># Sind jetzt alle Buchstaben entdeckt?</span>
-        <span class="hljs-keyword">if</span> all(b <span class="hljs-keyword">in</span> geratene_buchstaben <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> geheimwort):
-            print(<span class="hljs-string">f"Glückwunsch! Das Wort war: <span class="hljs-subst">{geheimwort}</span>"</span>)
-            <span class="hljs-keyword">break</span>   <span class="hljs-comment"># Das Spiel ist geschafft!</span>
-    <span class="hljs-keyword">else</span>:
-        print(<span class="hljs-string">"Leider falsch."</span>)
-        fehler += <span class="hljs-number">1</span>
-        <span class="hljs-keyword">if</span> fehler &gt;= max_fehler:
-            print(<span class="hljs-string">f"Game over! Das Wort war: <span class="hljs-subst">{geheimwort}</span>"</span>)
-            <span class="hljs-keyword">break</span>   <span class="hljs-comment"># Leider verloren, Spiel zu Ende</span>
-</div></code></pre>
-<hr>
-<h3 id="5%EF%B8%8F%E2%83%A3-was-k%C3%B6nntest-du-noch-ausprobieren">5️⃣ Was könntest du noch ausprobieren?</h3>
-<ul>
-<li><strong>Highscore-Liste:</strong> Wer schafft das Wort mit den wenigsten Fehlern? Das geht auch mit einem Dictionary!</li>
-<li><strong>Mehr Auswahl:</strong> Lasse den User entscheiden, ob er ein leichtes oder ein langes Wort spielen will.</li>
-<li><strong>Eigenes Menü:</strong> Baue eine Auswahl – „Neues Wort hinzufügen“, „Tipp sehen“, „Spiel starten“ usw.</li>
-<li><strong>Wörter speichern:</strong> Speichere eigene Wörter dauerhaft in einer Datei, damit sie beim nächsten Mal wieder da sind.</li>
-<li><strong>Grafik:</strong> Zeige ein kleines „ASCII-Bild“ vom Galgenmännchen für jeden Fehler an.</li>
-</ul>
-<hr>
-<p><strong>Merke:</strong><br>
-Mit Dictionaries kannst du in Python ganz einfach Wörter, Hinweise, Punktstände und vieles mehr verwalten.<br>
-Probier’ Sachen aus! Es ist vollkommen okay, Fehler zu machen – so lernt man am meisten.</p>
-<blockquote>
-<p><strong>Tipp:</strong><br>
-Bau erstmal das Grundspiel – wenn das läuft, kannst du es immer weiter verbessern.<br>
-Wenn etwas nicht klappt, frag gerne nach! Wir sind ja hier zum Lernen.</p>
-</blockquote>
-<hr>
-<p>Viel Spaß beim Basteln und Programmieren deines eigenen Hangman-Games! 🚀<br>
-Falls du Hilfe brauchst: Frag einfach deinen Tutor 😉</p>
-
+&lt;script&gt;
+    function zeigeKapitel(nummer) {
+        // Alle Kapitel ausblenden
+        var kapitel = document.querySelectorAll('.kapitel');
+        kapitel.forEach(k =&gt; k.classList.remove('aktiv'));
+        // Das gewünschte Kapitel einblenden
+        var aktuelles = document.getElementById('kapitel' + nummer);
+        if (aktuelles) {
+            aktuelles.classList.add('aktiv');
+            aktuelles.scrollIntoView({ behavior: &quot;smooth&quot; });
+        }
+    }
+&lt;/script&gt;
+</code></pre>
+</body>
+</html>
 </body>
 </html>

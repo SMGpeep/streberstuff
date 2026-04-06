@@ -1,137 +1,143 @@
-# todo: anpassen!
-    => ein html draus machen, gifs einbinden / visualisieren, etc.
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Side-Projekt: Hangman Schritt für Schritt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #f8f9fa;
+            color: #222;
+            line-height: 1.7;
+        }
+        .kapitel {
+            border: 1px solid #ebebeb;
+            box-shadow: 2px 2px 8px #e7e7e7;
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 35px;
+            border-radius: 7px;
+        }
+        .weiter-btn {
+            display: block;
+            margin: 25px auto 0 auto;
+            padding: 10px 30px;
+            font-size: 1rem;
+            background-color: #71b380;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .weiter-btn:hover {
+            background-color: #599c6b;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        .kapitel {
+            display: none;
+        }
+        .kapitel.aktiv {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Side-Projekt: Hangman Schritt für Schritt mit Python</h1>
+    <p style="font-style:italic;">Optionales Übungsprojekt – Arbeiten Sie Kapitel für Kapitel und bauen Sie Ihr eigenes Hangman-Spiel!</p>
+    <!-- Kapitel 1 -->
+    <section class="kapitel aktiv" id="kapitel1">
+        <h2>Kapitel 1: Was ist Hangman?</h2>
+        <p>
+            Hangman (Galgenmännchen) ist ein beliebtes Wortratespiel. Ziel ist es, Buchstaben zu raten, um ein verstecktes Wort zu finden.
+            In diesem Projekt programmieren wir Schritt für Schritt unser eigenes Hangman-Spiel in Python.
+        </p>
+        <button class="weiter-btn" onclick="zeigeKapitel(2)">Weiter zu Kapitel 2</button>
+    </section>
+    <!-- Kapitel 2 -->
+    <section class="kapitel" id="kapitel2">
+        <h2>Kapitel 2: Das Grundgerüst</h2>
+        <p>
+            Erstelle eine neue Python-Datei, z.B. <code>hangman.py</code>.<br>
+            Schreibe als allererstes folgenden Code, um das Spiel zu starten:
+        </p>
+        <pre>
+            print("Willkommen bei Hangman!")
+        </pre>
+        <p>
+            <b>Aufgabe:</b> Führe dein Skript aus und überprüfe, ob die Begrüßung erscheint.
+        </p>
+        <button class="weiter-btn" onclick="zeigeKapitel(3)">Weiter zu Kapitel 3</button>
+    </section>
 
-## 🐍 Schritt für Schritt: Dein erstes Hangman-Spiel (Galgenmännchen)
-
-Möchtest du dein erstes Hangman-Game in Python programmieren? Super Idee!  
-In dieser Anleitung erkläre ich jeden Schritt extra anfängerfreundlich – damit du alles nachvollziehen kannst, auch wenn du gerade erst mit Python startest.  
-Wir benutzen ein Dictionary, also ein besonderes Wörterbuch in Python, mit dem du die Worte und Hinweise speichern kannst.
-
----
-
-### Was ist Hangman?
-
-Beim Hangman-Spiel überlegt sich der Computer ein geheimes Wort.  
-Du versuchst, dieses Wort Buchstabe für Buchstabe zu erraten. Immer wenn du einen falschen Buchstaben rätst, wird ein Teil vom Galgenmännchen „gemalt“. Schaffst du es, das Wort zu raten, bevor das Männchen fertig „hängt“?
-
----
-
-### 1️⃣ Wörter und Hinweise als Dictionary speichern
-
-Ein Dictionary (auf Deutsch: Wörterbuch) ist in Python ein Behälter für „Schlüssel-Wert“-Paare.  
-Hier speichern wir unsere Wörter als Schlüssel und kleine Tipps als Werte.
-
-Das sieht so aus:
-
-```python
-# Wörterbuch: Wort -> Hinweis
-woerter = {
-    "python": "Das ist eine Programmiersprache.",
-    "katze": "Ein Haustier, das schnurren kann.",
-    "regen": "Fällt manchmal vom Himmel (und macht nass).",
-    "auto": "Fährt auf vier Rädern – meistens schnell!",
-    # Hier kannst du auch eigene Wörter & Hinweise dazu eintragen :-)
-}
-```
-*Du kannst später noch mehr Wörter/Tipp-Paare eintragen, oder die vorhandenen anpassen.*
-
----
-
-### 2️⃣ Zufällig ein Wort auswählen
-
-Wir wollen, dass jedes Mal ein anderes Wort drankommt.  
-Mit der `random`-Bibliothek kann man ganz einfach ein zufälliges Wort (und den dazugehörigen Hinweis) aus unserem Dictionary ziehen:
-
-```python
+    <!-- Kapitel 3 -->
+    <section class="kapitel" id="kapitel3">
+        <h2>Kapitel 3: Ein Wort auswählen</h2>
+        <p>
+            Jetzt brauchst du ein Wort, das erraten werden soll. Lege ein kleines Wörter-Array an, aus dem zufällig ein Wort gewählt wird.<br>
+            Beispiel:
+        </p>
+        <pre>
 import random
 
-# Aus dem Dictionary eine beliebige (Wort, Hinweis)-Kombination auswählen
-wort, hinweis = random.choice(list(woerter.items()))
-```
-*Der Computer wählt so ein beliebiges Wort + Tipp für dich.*
+woerter = ["python", "hangman", "programmieren"]
+wort = random.choice(woerter)
+        </pre>
+        <p>
+            <b>Aufgabe:</b> Gib das gewählte Wort mit <code>print(wort)</code> zur Kontrolle aus.
+        </p>
+        <button class="weiter-btn" onclick="zeigeKapitel(4)">Weiter zu Kapitel 4</button>
+    </section>
 
----
+    <!-- Kapitel 4 -->
+    <section class="kapitel" id="kapitel4">
+        <h2>Kapitel 4: Das Spielgerüst und erste Benutzereingabe</h2>
+        <p>
+            Nun bauen wir die Spiel-Logik schrittweise auf. 
+            Frage mit <code>input()</code> einen Buchstaben vom Spieler ab und gib ihn danach aus.
+        </p>
+        <pre>
+buchstabe = input("Gib einen Buchstaben ein: ")
+print("Du hast gewählt:", buchstabe)
+        </pre>
+        <p>
+            <b>Aufgabe:</b> Integriere diesen Code und führe das Programm aus.
+        </p>
+        <button class="weiter-btn" onclick="zeigeKapitel(5)">Weiter zu Kapitel 5</button>
+    </section>
 
-### 3️⃣ Wie läuft das Spiel?
+    <!-- Kapitel 5 (Beispiel; weitere Kapitel können genauso hinzugefügt werden) -->
+    <section class="kapitel" id="kapitel5">
+        <h2>Kapitel 5: Nächste Schritte</h2>
+        <p>
+            Super! Von hier aus kannst du das Spiel um folgende Aspekte erweitern:
+            <ul>
+                <li>Vergleiche den geratenen Buchstaben mit dem gesuchten Wort</li>
+                <li>Zeige den aktuellen Stand des Wortes (_ y _ h _ o _)</li>
+                <li>Zähle die Fehlversuche</li>
+                <li>Beende das Spiel bei Gewinn oder Verlust</li>
+            </ul>
+            <i>Konkrete Teilaufgaben dazu folgen noch in den nächsten Kapiteln.</i>
+        </p>
+        <button class="weiter-btn" onclick="zeigeKapitel(1)">Zurück zum Anfang</button>
+    </section>
 
-- Das Wort bleibt geheim – es wird als lauter Unterstriche angezeigt („_ _ _ _“).
-- Du gibst einen Buchstaben ein.
-- Ist der Buchstabe im Wort, wird er aufgedeckt.
-- Ist er nicht drin, zählst du 1 Fehler mehr.
-- Wenn du zu viele Fehler machst, verlierst du.
-- Wenn du alle Buchstaben errätst, hast du gewonnen.
-
----
-
-### 4️⃣ Beispiel: Eine ganze Spielrunde
-
-Hier ist ein einfacher Beispielcode, wie eine Runde aussehen kann.  
-Kommentarzeilen (`# ...`) erklären alles Schritt für Schritt. Lies sie in Ruhe durch!
-
-```python
-geheimwort = wort  # Das Wort, das erraten werden muss
-geratene_buchstaben = set()   # Hier speichern wir, was du schon geraten hast
-fehler = 0      # So viele Fehler hast du gemacht
-max_fehler = 7  # Nach 7 Fehlern ist leider Schluss
-
-while True:
-    # So sieht das Wort für dich aus: erratene Buchstaben werden gezeigt
-    anzeige = [buchstabe if buchstabe in geratene_buchstaben else "_" for buchstabe in geheimwort]
-    print("Wort:", " ".join(anzeige))
-    print(f"Tipp: {hinweis}")
-    print(f"Bisher geraten: {', '.join(sorted(geratene_buchstaben))}")
-    print(f"Fehler: {fehler}/{max_fehler}")
-
-    # Jetzt fragt der Computer dich nach dem nächsten Buchstaben
-    buchstabe = input("Bitte gib einen Buchstaben ein: ").lower()
-    
-    # Prüfe, ob die Eingabe gültig ist (nur EIN Buchstabe, kein Zahl/leerzeichen)
-    if not buchstabe or len(buchstabe) != 1 or not buchstabe.isalpha():
-        print("Achtung: Bitte genau einen Buchstaben eingeben!")
-        continue
-
-    if buchstabe in geratene_buchstaben:
-        print("Den Buchstaben hast du schon versucht.")
-        continue
-
-    # Füge den neuen Buchstaben zu den geratenen hinzu
-    geratene_buchstaben.add(buchstabe)
-
-    if buchstabe in geheimwort:
-        print("Richtig geraten!")
-        # Sind jetzt alle Buchstaben entdeckt?
-        if all(b in geratene_buchstaben for b in geheimwort):
-            print(f"Glückwunsch! Das Wort war: {geheimwort}")
-            break   # Das Spiel ist geschafft!
-    else:
-        print("Leider falsch.")
-        fehler += 1
-        if fehler >= max_fehler:
-            print(f"Game over! Das Wort war: {geheimwort}")
-            break   # Leider verloren, Spiel zu Ende
-```
-
----
-
-### 5️⃣ Was könntest du noch ausprobieren?
-
-- **Highscore-Liste:** Wer schafft das Wort mit den wenigsten Fehlern? Das geht auch mit einem Dictionary!
-- **Mehr Auswahl:** Lasse den User entscheiden, ob er ein leichtes oder ein langes Wort spielen will.
-- **Eigenes Menü:** Baue eine Auswahl – „Neues Wort hinzufügen“, „Tipp sehen“, „Spiel starten“ usw.
-- **Wörter speichern:** Speichere eigene Wörter dauerhaft in einer Datei, damit sie beim nächsten Mal wieder da sind.
-- **Grafik:** Zeige ein kleines „ASCII-Bild“ vom Galgenmännchen für jeden Fehler an.
-
----
-
-**Merke:**  
-Mit Dictionaries kannst du in Python ganz einfach Wörter, Hinweise, Punktstände und vieles mehr verwalten.  
-Probier’ Sachen aus! Es ist vollkommen okay, Fehler zu machen – so lernt man am meisten.
-
-> **Tipp:**  
-> Bau erstmal das Grundspiel – wenn das läuft, kannst du es immer weiter verbessern.  
-> Wenn etwas nicht klappt, frag gerne nach! Wir sind ja hier zum Lernen.
-
----
-
-Viel Spaß beim Basteln und Programmieren deines eigenen Hangman-Games! 🚀
-Falls du Hilfe brauchst: Frag einfach deinen Tutor 😉
+    <script>
+        function zeigeKapitel(nummer) {
+            // Alle Kapitel ausblenden
+            var kapitel = document.querySelectorAll('.kapitel');
+            kapitel.forEach(k => k.classList.remove('aktiv'));
+            // Das gewünschte Kapitel einblenden
+            var aktuelles = document.getElementById('kapitel' + nummer);
+            if (aktuelles) {
+                aktuelles.classList.add('aktiv');
+                aktuelles.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    </script>
+</body>
+</html>
