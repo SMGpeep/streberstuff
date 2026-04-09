@@ -367,6 +367,19 @@ code {
   </script>
 <!DOCTYPE html>
 <html lang="de">
+<script>
+    function zeigeKapitel(nummer) {
+        // Alle Kapitel ausblenden
+        var kapitel = document.querySelectorAll('.kapitel');
+        kapitel.forEach(k => k.classList.remove('aktiv'));
+        // Das gewünschte Kapitel einblenden
+        var aktuelles = document.getElementById('kapitel' + nummer);
+        if (aktuelles) {
+            aktuelles.classList.add('aktiv');
+            aktuelles.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+</script>
 <head>
     <meta charset="UTF-8">
     <title>Python Side-Projekt: Hangman Schritt für Schritt</title>
@@ -420,8 +433,11 @@ code {
     <section class="kapitel aktiv" id="kapitel1">
         <h2>Kapitel 1: Was ist Hangman?</h2>
         <p>
-            Hangman (Galgenmännchen) ist ein beliebtes Wortratespiel. Ziel ist es, Buchstaben zu raten, um ein verstecktes Wort zu finden.
-            In diesem Projekt programmieren wir Schritt für Schritt unser eigenes Hangman-Spiel in Python.
+           Hangman (auch "Galgenmännchen") ist ein sehr simples Wörterratespiel, um die Zeit ~im Unterricht~ zu vertreiben.
+           In den nachfolgenden Kapiteln werden wir eine Version davon in python umsetzen.
+            <br>
+           Disclaimer: Es gibt viele Wege etwas zu implementieren, hier geht es allein darum den Prozess näher kennenzulernen. 
+           <br>
         </p>
         <button class="weiter-btn" onclick="zeigeKapitel(2)">Weiter zu Kapitel 2</button>
     </section>
@@ -429,82 +445,111 @@ code {
     <section class="kapitel" id="kapitel2">
         <h2>Kapitel 2: Das Grundgerüst</h2>
         <p>
-            Erstelle eine neue Python-Datei, z.B. <code>hangman.py</code>.<br>
-            Schreibe als allererstes folgenden Code, um das Spiel zu starten:
+            Nachdem wir keine Ahnung haben, was wir alles benötigen, fangen wir klein an:
+            Wir erstellen eine neue Python-Datei, z.B. <code>hangman.py</code>.<br>
+            Dann printen wir, um sicher zustellen, dass die Datei auch ausführbar ist:
         </p>
         <pre>
             print("Willkommen bei Hangman!")
         </pre>
         <p>
-            <b>Aufgabe:</b> Führe dein Skript aus und überprüfe, ob die Begrüßung erscheint.
+            <b>Aufgabe:</b> Erstellen, schreiben, prüfen.
         </p>
         <button class="weiter-btn" onclick="zeigeKapitel(3)">Weiter zu Kapitel 3</button>
     </section>
-<pre><code>&lt;!-- Kapitel 3 --&gt;
-&lt;section class=&quot;kapitel&quot; id=&quot;kapitel3&quot;&gt;
-    &lt;h2&gt;Kapitel 3: Ein Wort auswählen&lt;/h2&gt;
-    &lt;p&gt;
-        Jetzt brauchst du ein Wort, das erraten werden soll. Lege ein kleines Wörter-Array an, aus dem zufällig ein Wort gewählt wird.&lt;br&gt;
-        Beispiel:
-    &lt;/p&gt;
-    &lt;pre&gt;
-</code></pre>
-<p>import random</p>
-<p>woerter = [&quot;python&quot;, &quot;hangman&quot;, &quot;programmieren&quot;]<br>
+    <!-- Kapitel 3 -->
+    <section class="kapitel" id="kapitel3">
+        <h2>Kapitel 3: Was braucht das Spiel eigentlich?</h2>
+        <p>
+            Nachdem wir Wörter erraten wollen, brauchen wir eine Liste an Wörtern, aus der ein Wort zufällig ausgewählt wird:
+        </p>
+        <pre>
+import random
+<p>woerter = [&quot;python&quot;, &quot;hangman&quot;, &quot;guenther&quot;]<br>
 wort = random.choice(woerter)<br>
 </pre><br>
 <p><br>
 <b>Aufgabe:</b> Gib das gewählte Wort mit <code>print(wort)</code> zur Kontrolle aus.<br>
 </p><br>
 <button class="weiter-btn" onclick="zeigeKapitel(4)">Weiter zu Kapitel 4</button><br>
-</section></p>
-<pre><code>&lt;!-- Kapitel 4 --&gt;
-&lt;section class=&quot;kapitel&quot; id=&quot;kapitel4&quot;&gt;
-    &lt;h2&gt;Kapitel 4: Das Spielgerüst und erste Benutzereingabe&lt;/h2&gt;
-    &lt;p&gt;
-        Nun bauen wir die Spiel-Logik schrittweise auf. 
-        Frage mit &lt;code&gt;input()&lt;/code&gt; einen Buchstaben vom Spieler ab und gib ihn danach aus.
-    &lt;/p&gt;
-    &lt;pre&gt;
-</code></pre>
-<p>buchstabe = input(&quot;Gib einen Buchstaben ein: &quot;)<br>
+</section><br>
+<!-- Kapitel 4 --><br>
+<section class="kapitel" id="kapitel4"><br>
+<h2>Kapitel 4: &quot;GameLoop&quot;</h2><br>
+<p><br>
+Unsere Vorbereitungen sind erstmal abgeschlossen.<br>
+Jetzt bauen wir eine <code>while()</code> Schleife, in der Unsere Game logik sich befindet.<br>
+Innerhalb dieser Schleife wollen wir jz den Nutzer nach seinen Eingaben/Guesses fragen:<br>
+</p><br>
+<pre><br>
+buchstabe = input(&quot;Gib einen Buchstaben ein: &quot;)<br>
 print(&quot;Du hast gewählt:&quot;, buchstabe)<br>
 </pre><br>
 <p><br>
-<b>Aufgabe:</b> Integriere diesen Code und führe das Programm aus.<br>
+<b>Aufgabe:</b> Integriere diesen Code in eine Schleife und führe das Programm aus.<br>
 </p><br>
 <button class="weiter-btn" onclick="zeigeKapitel(5)">Weiter zu Kapitel 5</button><br>
+</section><br>
+<!-- Kapitel 5 (Beispiel; weitere Kapitel können genauso hinzugefügt werden) --><br>
+<section class="kapitel" id="kapitel5"><br>
+<h2>Kapitel 5: Ist der Buchstabe richtig?</h2><br>
+<p><br>
+Jetzt die &quot;logik&quot;. Ist der Guess richtig?<br>
+Was passiert, wenn er richtig ist?<br>
+Was, wenn er falsch ist?<br><br>
+<b>Aufgabe:</b> Prüfe ob der Buchstabe im Wort vorhanden ist.<br>
+</p><br>
+<button class="weiter-btn" onclick="zeigeKapitel(6)">Weiter zu Kapitel 6</button><br>
+</section><br>
+<section class="kapitel" id="kapitel6"><br>
+<h2>Kapitel 6: Fehlversuche zählen</h2><br>
+<p><br>
+Oh nurr, der Guess war falsch.<br><br>
+I guess dann zähl ich <code>fehlversuche = fehlversuche +1</code><br>
+<b>Aufgabe:</b> Füge eine Variable hinzu, die die Anzahl der Fehler mitzählt, und erhöhe sie, wenn ein Buchstabe nicht im Wort ist.<br>
+</p><br>
+<button class="weiter-btn" onclick="zeigeKapitel(7)">Weiter zu Kapitel 7</button><br>
+</section><br>
+<section class="kapitel" id="kapitel7"><br>
+<h2>Kapitel 7: Gewinn oder Verlust erkennen</h2><br>
+<p><br>
+Das Spiel soll beendet werden, wenn entweder alle Buchstaben erraten wurden, oder die Maximale Anzahl an Fehlern überschritten wurden.<br>
+Die einzige Frage hier ist, wie soll das Spiel beendet werden.<br><br>
+Ist es ein <code>while gameNotOver():</code><br>
+oder ein: <code>while true: if gameOver():break</code><br>
+<b>Aufgabe:</b>Ergänze eine Abfrage, die prüft ob das Spiel vorbei ist &amp; gib eine entsprechende Nachricht aus.<br>
+</p><br>
+<button class="weiter-btn" onclick="zeigeKapitel(8)">Weiter zu Kapitel 8</button><br>
+</section><br>
+<section class="kapitel" id="kapitel8"><br>
+<h2>Kapitel 8: Gestalten wir es schöner </h2><br>
+<p><br>
+Theoretisch!<br>
+Ist das Spiel jetzt spielbar.<br>
+Allerdings fehlt uns noch der Charme des Galgenmännchens.<br>
+Wir wollen wissen, wie viele Stellen das Wort hat, bspw: _ _ _ _ _<br>
+Und sobald wir ein &quot;P&quot; erraten, geben wir es auch aus:   P _ _ _ _<br>
+<b><br>
+Das der pseudocode:<br>
+<code>Für jeden Buchstaben im string: wenn buchstabe nicht erraten: buchstabe = '_'</code><br>
+<b>Aufgabe:</b> Programmiere eine Ausgabe, die alle bisher korrekt geratenen Buchstaben zeigt, alle anderen als Unterstrich.<br>
+</p><br>
+<button class="weiter-btn" onclick="zeigeKapitel(9)">Weiter</button><br>
 </section></p>
-<pre><code>&lt;!-- Kapitel 5 (Beispiel; weitere Kapitel können genauso hinzugefügt werden) --&gt;
-&lt;section class=&quot;kapitel&quot; id=&quot;kapitel5&quot;&gt;
-    &lt;h2&gt;Kapitel 5: Nächste Schritte&lt;/h2&gt;
-    &lt;p&gt;
-        Super! Von hier aus kannst du das Spiel um folgende Aspekte erweitern:
-        &lt;ul&gt;
-            &lt;li&gt;Vergleiche den geratenen Buchstaben mit dem gesuchten Wort&lt;/li&gt;
-            &lt;li&gt;Zeige den aktuellen Stand des Wortes (_ y _ h _ o _)&lt;/li&gt;
-            &lt;li&gt;Zähle die Fehlversuche&lt;/li&gt;
-            &lt;li&gt;Beende das Spiel bei Gewinn oder Verlust&lt;/li&gt;
-        &lt;/ul&gt;
-        &lt;i&gt;Konkrete Teilaufgaben dazu folgen noch in den nächsten Kapiteln.&lt;/i&gt;
-    &lt;/p&gt;
-    &lt;button class=&quot;weiter-btn&quot; onclick=&quot;zeigeKapitel(1)&quot;&gt;Zurück zum Anfang&lt;/button&gt;
-&lt;/section&gt;
-
-&lt;script&gt;
-    function zeigeKapitel(nummer) {
-        // Alle Kapitel ausblenden
-        var kapitel = document.querySelectorAll('.kapitel');
-        kapitel.forEach(k =&gt; k.classList.remove('aktiv'));
-        // Das gewünschte Kapitel einblenden
-        var aktuelles = document.getElementById('kapitel' + nummer);
-        if (aktuelles) {
-            aktuelles.classList.add('aktiv');
-            aktuelles.scrollIntoView({ behavior: &quot;smooth&quot; });
-        }
-    }
-&lt;/script&gt;
-</code></pre>
+  </section>
+    <section class="kapitel" id="kapitel9">
+        <h2>Kapitel 9: Gestalten wir es NOCH schöner </h2>
+        <p>
+            Herzlichen Glückwunsch!
+            Das Spiel läuft.
+            Wir können allerdings noch einen oben drauf setzen, indem wir eine kleine Hangman "animation" dazu bauen.
+            Hint: Wir brauchen eine Liste an Frames
+            <!-- hangman.gif einbinden-->
+            <b>
+            <b>Aufgabe:</b> Zeig das Galgenmännchen an & lass es mit steigender Fehlerzahl weiter hängen :().
+        </p>
+        <button class="weiter-btn" onclick="zeigeKapitel(1)">Zurück zum Anfang</button>
+    </section>
 </body>
 </html>
 </body>
