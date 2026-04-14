@@ -12,6 +12,124 @@
             aktuelles.scrollIntoView({ behavior: "smooth" });
         }
     }
+    function zeigeCode() {
+        // Ersetze gesamten Body-Inhalt durch die Code-Seite
+        document.body.innerHTML = `
+            <h1>Hier ist der fertige Hangman-Code!</h1>
+            <p>
+            Du kannst diesen Code in eine <code>hangman.py</code> Datei kopieren und starten.<br>
+            Versuche aber trotzdem, die Schritte vorher selbst zu lösen ;-)
+            </p>
+            <pre style="background:#212529;color:#f8f8f2;padding:20px;border-radius:6px;overflow:auto;font-size:1rem">
+import random
+woerter = {
+    "python": "Programmiersprache",
+    "katze": "Ein Haustier, das schnurren kann",
+    "regen": "Fällt manchmal vom Himmel",
+    "auto": "Fährt auf vier Rädern",
+    # ... (füge gerne eigene Wörter & Hinweise dazu!)
+}
+wort, hinweis = random.choice(list(woerter.items()))
+geheimwort = wort
+geratene_buchstaben = set()
+fehler = 0
+max_fehler = 7   # z.B. 7 Fehler sind Game Over
+galgen = [
+    """
+       ------
+       |    |
+       |    
+       |   
+       |    
+       |   
+    --------
+    """,
+    """
+       ------
+       |    |
+       |    O
+       |   
+       |    
+       |   
+    --------
+    """,
+    """
+       ------
+       |    |
+       |    O
+       |    |
+       |    
+       |   
+    --------
+    """,
+    """
+       ------
+       |    |
+       |    O
+       |   /|
+       |    
+       |   
+    --------
+    """,
+    """
+       ------
+       |    |
+       |    O
+       |   /|\\
+       |    
+       |   
+    --------
+    """,
+    """
+       ------
+       |    |
+       |    O
+       |   /|\\
+       |   / 
+       |   
+    --------
+    """,
+    """
+       ------
+       |    |
+       |    O
+       |   /|\\
+       |   / \\
+       |   
+    --------
+    """
+]
+while True:
+    # Wortanzeige (z.B. _ y t _ _ _)
+    anzeige = [b if b in geratene_buchstaben else "_" for b in geheimwort]
+    print("Wort:", " ".join(anzeige))
+    print(f"Tipp: {hinweis}")
+    print(f"Bisher geraten: {', '.join(sorted(geratene_buchstaben))}")
+    print(galgen[min(fehler, len(galgen)-1)])
+    print(f"Fehler: {fehler}/{max_fehler}")
+    buchstabe = input("Nächster Buchstabe: ").lower()
+    if not buchstabe or len(buchstabe) != 1 or not buchstabe.isalpha():
+        print("Bitte gib genau einen Buchstaben ein!")
+        continue
+    if buchstabe in geratene_buchstaben:
+        print("Den hast du schon probiert!")
+        continue
+    geratene_buchstaben.add(buchstabe)
+    if buchstabe in geheimwort:
+        print("Richtig!")
+        if all(b in geratene_buchstaben for b in geheimwort):
+            print(f"Glückwunsch, das Wort war: {geheimwort}")
+            break
+    else:
+        print("Leider falsch.")
+        fehler += 1
+        if fehler >= max_fehler:
+            print(f"Game over! Das Wort war: {geheimwort}")
+            break
+            </pre>
+            <button class="weiter-btn" onclick="window.location.reload()">Zurück zum Schritt-für-Schritt Guide</button>
+        `;
+    }
 </script>
 <head>
     <meta charset="UTF-8">
@@ -33,7 +151,7 @@
             margin-bottom: 35px;
             border-radius: 7px;
         }
-        .weiter-btn {
+        .weiter-btn, .cheater-btn {
             display: block;
             margin: 25px auto 0 auto;
             padding: 10px 30px;
@@ -45,7 +163,7 @@
             cursor: pointer;
             transition: background 0.2s;
         }
-        .weiter-btn:hover {
+        .weiter-btn:hover, .cheater-btn:hover {
             background-color: #599c6b;
         }
         h2 {
@@ -183,6 +301,7 @@ print("Du hast gewählt:", buchstabe)
             <b>Aufgabe:</b> Zeig das Galgenmännchen an & lass es mit steigender Fehlerzahl weiter hängen :().
         </p>
         <button class="weiter-btn" onclick="zeigeKapitel(1)">Zurück zum Anfang</button>
+        <button class="cheater-btn" onclick="zeigeCode()"> Ich will cheaten :(</button>
     </section>
   
 </body>

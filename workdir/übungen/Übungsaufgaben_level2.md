@@ -58,26 +58,28 @@ Exakt wie Level 1 Aufgaben-Aufbau, aber angepasst auf Level 2.
 
 <div class="pagebreak"></div>
 
+<div class="pagebreak"></div>
+
 # Deine Level 2 Aufgaben – Jetzt wird’s spannend! 🧩
 
-## Aufgabe 1: Mini-Taschenrechner
+## Aufgabe 1: Vokale und Konsonanten zählen
 
 Schreib ein Programm, das...
 
-- Zwei Zahlen vom User abfragt
-- Nach der gewünschten Rechenart fragt: +, -, * oder /
-- Das passende Ergebnis ausgibt („Ergebnis: …“)
+- Einen Satz oder ein Wort vom User abfragt
+- Die Anzahl der Vokale (a, e, i, o, u) und Konsonanten im eingegebenen Text zählt
+- Beide Zahlen ordentlich ausgibt („Vokale: …“, „Konsonanten: …“). Umlaute (ä, ö, ü) dürfen entweder ignoriert oder dazugerechnet werden, entscheide selbst!
 
 > 💡 **Tipp:**  
-> Nutz `if/elif/else` für die Auswahl der Operation.  
-> Teil niemals durch 0 – prüfe das vorher und gib eine freundliche Fehlermeldung aus!
+> Mach alles klein mit `.lower()`  
+> Prüfe für jeden Buchstaben mit `if`, ob er in `"aeiou"` steht.  
+> Für Konsonanten: Prüfe, ob es ein Buchstabe ist, aber kein Vokal.
 
 **Beispiel:**  
 <pre>
-Erste Zahl: <b>12</b>
-Zweite Zahl: <b>4</b>
-Operation (+, -, *, /): <b>*</b>
-Ergebnis: 48
+Text: <b>Hallo Welt!</b>
+Vokale: 3
+Konsonanten: 5
 </pre>
 
 ---
