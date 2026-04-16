@@ -219,7 +219,8 @@ Dementsprechend "besorgen" wir uns:
     Kuchenform
 
 Und jetzt schreiben wir unseren Pseudocode:
-    ```python
+
+```python
     function Backroutine():
         Schüssel1 = Schüsselroboter.NimmNeueSchüssel()
         Schüssel2 = Schüsselroboter.NimmNeueSchüssel()
@@ -236,7 +237,8 @@ Und jetzt schreiben wir unseren Pseudocode:
         Greifarm.BewegeAusOfen(Kuchenform)
 
         return Kuchenform.Inhalt
-    ```
+```
+
 Nach einem ersten groben Entwurf prüfen wir, ob wir alles bedacht haben, was wir machen wollten:
 
     "Gegeben sei [....]" 
