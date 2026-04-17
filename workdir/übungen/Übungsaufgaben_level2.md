@@ -79,7 +79,7 @@ Schreib ein Programm, das...
 <pre>
 Text: <b>Hallo Welt!</b>
 Vokale: 3
-Konsonanten: 5
+Konsonanten: 6
 </pre>
 
 ---

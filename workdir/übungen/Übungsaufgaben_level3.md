@@ -132,19 +132,6 @@ Stichwort: Datei auslesen, Wörter zählen, nach Häufigkeit sortieren.
 
 ---
 
-## Aufgabe 8: Die magische Zahl – Rätsellust
-
-Der Computer denkt sich eine „magische Zahl“ zwischen 1 und 100 aus.<br>
-Du darfst raten: Nach jedem Versuch bekommst du ein Feedback („zu groß“, „zu klein“, „geschafft!“).  
-Am Ende siehst du, wie viele Versuche du brauchtest.
-
-> <span style="color:#ad1457;">💡 Tipp:</span>
-> • <code>random.randint(1, 100)</code> zaubert dir die Aufgabe  
-> • <b>while</b>-Schleife: Bleib hartnäckig!  
-> • Versuchszählt hilft dir vergleichen :)
-
----
-
 <span style="color:#1a237e;"><b>Viel Spaß mit den Level 3 Challenges – mutig testen, kombinieren, eigene Extras probieren … und bitte Fehler feiern! 🤓🎉</b></span>
 
 ---
